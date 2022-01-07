@@ -22,26 +22,26 @@
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /
-[  9%] Building CXX object CMakeFiles/cvicenie2.dir/1_characterType.cpp.o
-[ 18%] Building CXX object CMakeFiles/cvicenie2.dir/testyUloha_1.cpp.o
-[ 27%] Building CXX object CMakeFiles/cvicenie2.dir/GoogleTest/gtest-death-test.cc.o
-[ 36%] Building CXX object CMakeFiles/cvicenie2.dir/GoogleTest/gtest-filepath.cc.o
-[ 45%] Building CXX object CMakeFiles/cvicenie2.dir/GoogleTest/gtest-port.cc.o
-[ 54%] Building CXX object CMakeFiles/cvicenie2.dir/GoogleTest/gtest-printers.cc.o
-[ 63%] Building CXX object CMakeFiles/cvicenie2.dir/GoogleTest/gtest-test-part.cc.o
-[ 72%] Building CXX object CMakeFiles/cvicenie2.dir/GoogleTest/gtest-typed-test.cc.o
-[ 81%] Building CXX object CMakeFiles/cvicenie2.dir/GoogleTest/gtest.cc.o
-[ 90%] Building CXX object CMakeFiles/cvicenie2.dir/GoogleTest/gtest_main.cc.o
-[100%] Linking CXX executable //cvicenie2
-[100%] Built target cvicenie2
+[  9%] Building CXX object CMakeFiles/solution.dir/code.cpp.o
+[ 18%] Building CXX object CMakeFiles/solution.dir/tests.cpp.o
+[ 27%] Building CXX object CMakeFiles/solution.dir/GoogleTest/gtest-death-test.cc.o
+[ 36%] Building CXX object CMakeFiles/solution.dir/GoogleTest/gtest-filepath.cc.o
+[ 45%] Building CXX object CMakeFiles/solution.dir/GoogleTest/gtest-port.cc.o
+[ 54%] Building CXX object CMakeFiles/solution.dir/GoogleTest/gtest-printers.cc.o
+[ 63%] Building CXX object CMakeFiles/solution.dir/GoogleTest/gtest-test-part.cc.o
+[ 72%] Building CXX object CMakeFiles/solution.dir/GoogleTest/gtest-typed-test.cc.o
+[ 81%] Building CXX object CMakeFiles/solution.dir/GoogleTest/gtest.cc.o
+[ 90%] Building CXX object CMakeFiles/solution.dir/GoogleTest/gtest_main.cc.o
+[100%] Linking CXX executable //solution
+[100%] Built target solution
 Running main() from gtest_main.cc
 [==========] Running 2 tests from 1 test case.
 [----------] Global test environment set-up.
 [----------] 2 tests from TestyPrvejUlohy
-[ RUN      ] TestyPrvejUlohy.1jeNeparne
-[       OK ] TestyPrvejUlohy.1jeNeparne (0 ms)
-[ RUN      ] TestyPrvejUlohy.2jePeparne
-[       OK ] TestyPrvejUlohy.2jePeparne (0 ms)
+[ RUN      ] TestyPrvejUlohy.Jedna
+[       OK ] TestyPrvejUlohy.Jedna (0 ms)
+[ RUN      ] TestyPrvejUlohy.Dva
+[       OK ] TestyPrvejUlohy.Dva (0 ms)
 [----------] 2 tests from TestyPrvejUlohy (0 ms total)
 
 [----------] Global test environment tear-down
