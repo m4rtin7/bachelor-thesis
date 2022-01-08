@@ -9,10 +9,11 @@ const bodyParser = require('body-parser')
 const { runTests, removeDockerImage } = require('./helpers/runTests')
 const { existsSync, rmSync } = require('fs')
 const { removeFirstLine } = require('./helpers/removeFirstLine')
+const { validOutputFile } = require('./helpers/validOutputFile')
 
 const jsonParser = bodyParser.json()
 
-app.post('/dummy', jsonParser, async (req, res) => {
+app.post('/test', jsonParser, async (req, res) => {
   console.log(req.body)
   const body = req.body
   const dependsPath = path.resolve(__dirname, `./dockers/depends`)
@@ -42,9 +43,10 @@ app.post('/dummy', jsonParser, async (req, res) => {
     errorMessage = removeFirstLine(err.message)
 
     if (errorMessage) {
+      console.log('ERROR')
       res.send({
         passed: false,
-        message: errorMessage,
+        file: JSON.stringify(errorMessage),
       })
       return
     }
@@ -52,13 +54,15 @@ app.post('/dummy', jsonParser, async (req, res) => {
       const resFile = fs.readFile(`${newFolderPath}/res.txt`)
       res.send({
         passed: false,
-        file: JSON.stringify((await resFile).toString('utf-8')),
+        file: JSON.stringify(
+          validOutputFile((await resFile).toString('utf-8'))
+        ),
       })
     } else {
       res.send(
         JSON.stringify({
           passed: false,
-          message: 'Nepodarilo sa vykonať testy.',
+          file: 'Nepodarilo sa vykonať testy.',
         })
       )
     }
