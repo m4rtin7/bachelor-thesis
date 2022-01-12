@@ -2,7 +2,8 @@ import { Button, Grid, Typography } from '@mui/material'
 import CodeEditor from '@uiw/react-textarea-code-editor'
 import { useState } from 'react'
 import { runTests } from '../helpers/requests'
-import MySnackbar from './Snackbar'
+import OutputModal from './OutputModal'
+import MySnackbar from './MySnackbar'
 
 type ExcersisePageProps = {
   name: string
@@ -22,6 +23,7 @@ export const ExcersisePage = ({
   const [editedCode, setEditedCode] = useState<string>(editableCode || '')
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false)
   const [passed, setPassed] = useState<boolean>(false)
+  const [showOutput, setShowOutput] = useState<boolean>(false)
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -29,7 +31,7 @@ export const ExcersisePage = ({
 
     const resp = await runTests(1, editedCode)
     setPassed(resp.passed)
-    setOutput(resp.file)
+    setOutput(JSON.parse(resp.file))
     setOpenSnackbar(true)
     setLoading(false)
     console.log(output)
@@ -81,12 +83,24 @@ export const ExcersisePage = ({
           >
             {loading ? 'Loading...' : 'Submit'}
           </Button>
+          <Button
+            variant="contained"
+            disabled={!!!output}
+            onClick={() => setShowOutput(true)}
+          >
+            Show output
+          </Button>
         </Grid>
       </Grid>
       <MySnackbar
         open={openSnackbar}
         passed={passed}
         setOpen={setOpenSnackbar}
+      />
+      <OutputModal
+        open={showOutput}
+        handleClose={() => setShowOutput(false)}
+        data={output}
       />
     </>
   )

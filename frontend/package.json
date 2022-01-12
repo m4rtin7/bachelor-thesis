@@ -15,6 +15,7 @@
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "@types/react-redux": "^7.1.21",
+    "@uiw/react-monacoeditor": "^3.4.7",
     "@uiw/react-textarea-code-editor": "^1.4.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -47,6 +48,5 @@
       "last 1 safari version"
     ]
   },
-   "proxy": "http://localhost:5000"
-  
+  "proxy": "http://localhost:5000"
 }

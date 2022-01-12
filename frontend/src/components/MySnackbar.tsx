@@ -39,9 +39,7 @@ export default function MySnackbar({ passed, open, setOpen }: MySnackbarProps) {
         severity={passed ? 'success' : 'error'}
         sx={{ width: '100%' }}
       >
-        {passed
-          ? 'Presli vsetky testy!'
-          : 'Nepodarilo sa uspesne spravit vsetky testy!'}
+        {passed ? 'Všetky testy boli úspešné!' : 'Testy neboli úspešné!'}
       </Alert>
     </Snackbar>
   )

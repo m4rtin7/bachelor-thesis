@@ -12,14 +12,20 @@ function App() {
     dispatch(setLogged(!logged))
   }
 
+  const code = `#include "header.h"
+
+bool jeParny(int i){
+  return true;
+}`
+
   return (
     <div>
       {logged || true ? (
         <ExcersisePage
           name={'Je Parny'}
           excersiseText="Tvojou ulohou je napisat funkciu, ktora vrati pre parne cislo true a pre neparne false"
-          code=""
-          editableCode=""
+          code={code}
+          editableCode={code}
         />
       ) : (
         <div></div>
