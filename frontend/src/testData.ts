@@ -1,0 +1,48 @@
+import { Excersise } from "./types";
+
+export const excers: Excersise[] = [
+  {
+    id: 1,
+    title: "Prve cvicenie",
+    text: "text cvicenia",
+    leftVersion: 17,
+    leftCode: "left code",
+    leftTests: "left tests",
+    rightVersion: 20,
+    rightCode: "right code",
+    rightTests: "right tests",
+  },
+  {
+    id: 2,
+    title: "Druhe cvicenie",
+    text: "text cvicenia",
+    leftVersion: 17,
+    leftCode: "left code",
+    leftTests: "left tests",
+    rightVersion: 20,
+    rightCode: "right code",
+    rightTests: "right tests",
+  },
+  {
+    id: 3,
+    title: "Tretie cvicenie",
+    text: "text cvicenia",
+    leftVersion: 17,
+    leftCode: "left code",
+    leftTests: "left tests",
+    rightVersion: 20,
+    rightCode: "right code",
+    rightTests: "right tests",
+  },
+  {
+    id: 4,
+    title: "Stvrte cvicenie",
+    text: "text cvicenia",
+    leftVersion: 17,
+    leftCode: "left code",
+    leftTests: "left tests",
+    rightVersion: 20,
+    rightCode: "right code",
+    rightTests: "right tests",
+  },
+];
