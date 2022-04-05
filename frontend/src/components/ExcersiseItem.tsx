@@ -1,30 +1,37 @@
-import { Paper, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import { Excersise } from "../types";
+import { Paper, Stack } from '@mui/material'
+import { Exercise } from '../types'
+import { Heading, Paragraph } from './typography'
 
-export const ExcersiseItem = ({
-  excersise,
+export const ExerciseItem = ({
+  exercise,
   onClick,
 }: {
-  excersise: Excersise;
-  onClick: (v: void) => void;
+  exercise: Exercise
+  onClick: (v: void) => void
 }) => {
-  const { title } = excersise;
+  const { title, text, deadline } = exercise
   return (
-    <Paper>
-      <Box
-        display="flex"
-        flexDirection="row"
-        onClick={() => onClick()}
-        sx={{
-          ":hover": {
-            cursor: "pointer",
-            background: "red",
-          },
-        }}
-      >
-        <Typography>{title}</Typography>
-      </Box>
+    <Paper
+      onClick={() => onClick()}
+      sx={{
+        cursor: 'pointer',
+        '&:hover': { opacity: 0.8 },
+        borderRadius: 0,
+        py: 2,
+        px: 4,
+      }}
+    >
+      <Stack>
+        <Heading>{title}</Heading>
+        <Stack direction="row" justifyContent="space-between" spacing={4}>
+          <Paragraph noWrap>{text}</Paragraph>
+          <Paragraph minWidth="fit-content">
+            {deadline
+              ? deadline.toTimeString()
+              : new Date('August 19, 1975 23:15:30').toDateString()}
+          </Paragraph>
+        </Stack>
+      </Stack>
     </Paper>
-  );
-};
+  )
+}

@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.6.2)
+project(solution)
+
+set(CMAKE_CXX_STANDARD 17)
+
+find_package(Threads REQUIRED)
+
+set(SOURCE_FILES
+       
+        tests.cpp
+
+        ../GoogleTest/gtest-death-test.cc
+        ../GoogleTest/gtest-filepath.cc
+        ../GoogleTest/gtest-port.cc
+        ../GoogleTest/gtest-printers.cc
+        ../GoogleTest/gtest-test-part.cc
+        ../GoogleTest/gtest-typed-test.cc
+        ../GoogleTest/gtest.cc
+        ../GoogleTest/gtest_main.cc)
+
+include_directories(../GoogleTest)
+add_executable(solution ${SOURCE_FILES})
+target_link_libraries(solution ${CMAKE_THREAD_LIBS_INIT} pthread)

@@ -1,0 +1,10 @@
+{
+  "DATABASE": {
+    "USER": "postgres",
+    "HOST": "localhost",
+    "DATABASE": "dbbp",
+    "PASSWORD": "admin",
+    "DIALECT": "postgres",
+    "PORT": 5432
+  }
+}
