@@ -1,0 +1,48 @@
+Running main() from gtest_main.cc
+[==========] Running 8 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 8 tests from TestyPrvejUlohy
+[ RUN      ] TestyPrvejUlohy.Jedna
+[       OK ] TestyPrvejUlohy.Jedna (0 ms)
+[ RUN      ] TestyPrvejUlohy.Dva
+/test/tests.cpp:16: Failure
+      Expected: startsWith("a",'a')
+      Which is: false
+To be equal to: true
+[  FAILED  ] TestyPrvejUlohy.Dva (0 ms)
+[ RUN      ] TestyPrvejUlohy.Dlhy
+/test/tests.cpp:20: Failure
+      Expected: startsWith("abbbbb",'a')
+      Which is: false
+To be equal to: true
+[  FAILED  ] TestyPrvejUlohy.Dlhy (0 ms)
+[ RUN      ] TestyPrvejUlohy.Prazdny
+[       OK ] TestyPrvejUlohy.Prazdny (0 ms)
+[ RUN      ] TestyPrvejUlohy.JednaNekonci
+[       OK ] TestyPrvejUlohy.JednaNekonci (0 ms)
+[ RUN      ] TestyPrvejUlohy.DvaKonci
+/test/tests.cpp:32: Failure
+      Expected: endsWith("a",'a')
+      Which is: false
+To be equal to: true
+[  FAILED  ] TestyPrvejUlohy.DvaKonci (0 ms)
+[ RUN      ] TestyPrvejUlohy.DlhyKonci
+/test/tests.cpp:36: Failure
+      Expected: endsWith("bbbbbbba",'a')
+      Which is: false
+To be equal to: true
+[  FAILED  ] TestyPrvejUlohy.DlhyKonci (0 ms)
+[ RUN      ] TestyPrvejUlohy.PrazdnyNekonci
+[       OK ] TestyPrvejUlohy.PrazdnyNekonci (0 ms)
+[----------] 8 tests from TestyPrvejUlohy (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 8 tests from 1 test case ran. (0 ms total)
+[  PASSED  ] 4 tests.
+[  FAILED  ] 4 tests, listed below:
+[  FAILED  ] TestyPrvejUlohy.Dva
+[  FAILED  ] TestyPrvejUlohy.Dlhy
+[  FAILED  ] TestyPrvejUlohy.DvaKonci
+[  FAILED  ] TestyPrvejUlohy.DlhyKonci
+
+ 4 FAILED TESTS

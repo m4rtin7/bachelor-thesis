@@ -218,6 +218,15 @@ solution_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 solution_SOURCE_DIR:STATIC=/test
 
+//Value Computed by CMake
+test_BINARY_DIR:STATIC=/test/build
+
+//Value Computed by CMake
+test_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+test_SOURCE_DIR:STATIC=/test
+
 
 ########################
 # INTERNAL cache entries

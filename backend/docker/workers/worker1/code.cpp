@@ -2,12 +2,10 @@
  
 bool startsWith(std::string str, char ch)
 {
-    return ch == str[0];
-    
+    return false;
 }
 
 bool endsWith(std::string str, char ch)
 {
-    return ch == str[str.length()-1];
-       
+    return false;
 }

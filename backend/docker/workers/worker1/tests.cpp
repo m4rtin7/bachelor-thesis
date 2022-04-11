@@ -23,10 +23,6 @@ TEST(TestyPrvejUlohy, Prazdny)
 {
     ASSERT_EQ(startsWith("",'a'), false);
 }
-TEST(TestyPrvejUlohy, PrazdnyPrazdny)
-{
-    ASSERT_EQ(startsWith("",''), false);
-}
 TEST(TestyPrvejUlohy, JednaNekonci)
 {
     ASSERT_EQ(endsWith("a", 'b'), false);

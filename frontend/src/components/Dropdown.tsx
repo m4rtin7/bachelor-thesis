@@ -14,7 +14,7 @@ export const Dropdown = ({ value, onChange, items, label }: DropdownProps) => {
   return (
     <FormControl fullWidth>
       <Select
-        sx={{ background: '#000' }}
+        // sx={{ background: '#000' }}
         value={value}
         label={label}
         onChange={(e) => onChange(e.target.value)}

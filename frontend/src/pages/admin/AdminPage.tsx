@@ -39,8 +39,10 @@ export const AdminPage = ({
   const [resultLeft, setResultLeft] = useState<string>('')
 
   const [addExercise] = useAddExerciseMutation()
-  const [testCode, { data: leftRes }] = useTestMutation()
-  const [testRightCode, { data: rightRes }] = useTestMutation()
+  const [testLeftCode, { data: leftRes, isLoading: isLoadingLeft }] =
+    useTestMutation()
+  const [testRightCode, { data: rightRes, isLoading: isLoadingRight }] =
+    useTestMutation()
 
   useEffect(() => {
     setTestVersion(Math.max(rightVersion, leftVersion))
@@ -62,13 +64,16 @@ export const AdminPage = ({
     console.log(JSON.stringify(x))
   }
 
-  const onTest = async () => {
-    testCode({
+  const onTestLeft = async () => {
+    testLeftCode({
       code: leftCode,
       id: exercise?.id,
       version: leftVersion,
       test,
     })
+  }
+
+  const onTestRight = async () => {
     testRightCode({
       code: rightCode,
       id: exercise?.id,
@@ -84,7 +89,7 @@ export const AdminPage = ({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Title"
-          sx={{ background: '#000', flexGrow: 1 }}
+          sx={{ flexGrow: 1 }}
         />
         <Button variant="contained" onClick={handleSubmit}>
           Submit
@@ -92,7 +97,14 @@ export const AdminPage = ({
         <Button variant="contained" onClick={onBack}>
           Back
         </Button>
-        <Button variant="contained" onClick={onTest}>
+        <Button
+          variant="contained"
+          disabled={isLoadingLeft || isLoadingRight}
+          onClick={() => {
+            onTestLeft()
+            onTestRight()
+          }}
+        >
           Test
         </Button>
       </Stack>
@@ -100,7 +112,6 @@ export const AdminPage = ({
         placeholder="description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        sx={{ background: '#000' }}
       />
       <Split
         sizes={[34, 34, 32]}
@@ -126,11 +137,20 @@ export const AdminPage = ({
         >
           <Box height={'100%'}>
             <Typography>Code</Typography>
-            <Dropdown
-              value={leftVersion}
-              items={VERSIONS}
-              onChange={setLeftVersion}
-            />
+            <Stack direction="row">
+              <Dropdown
+                value={leftVersion}
+                items={VERSIONS}
+                onChange={setLeftVersion}
+              />
+              <Button
+                variant="contained"
+                onClick={onTestLeft}
+                disabled={isLoadingLeft}
+              >
+                Test
+              </Button>
+            </Stack>
             <Monaco code={leftCode} setCode={setLeftCode} />
           </Box>
           <Monaco code={leftRes} />
@@ -148,11 +168,20 @@ export const AdminPage = ({
         >
           <Box>
             <Typography>Code</Typography>
-            <Dropdown
-              value={rightVersion}
-              items={VERSIONS}
-              onChange={setRightVersion}
-            />
+            <Stack direction="row">
+              <Dropdown
+                value={rightVersion}
+                items={VERSIONS}
+                onChange={setRightVersion}
+              />
+              <Button
+                variant="contained"
+                onClick={onTestRight}
+                disabled={isLoadingRight}
+              >
+                Test
+              </Button>
+            </Stack>
             <Monaco code={rightCode} setCode={setRightCode} />
           </Box>
           <Box height="100%">
@@ -161,11 +190,11 @@ export const AdminPage = ({
         </Split>
         <Box>
           <Typography>Tests</Typography>
-          <Dropdown
+          {/* <Dropdown
             value={testsVersion}
             items={VERSIONS}
             onChange={setTestVersion}
-          />
+          /> */}
 
           <Monaco code={test} setCode={setTest} />
         </Box>

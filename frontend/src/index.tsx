@@ -8,7 +8,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import App from './App'
 
 import { ThemeProvider } from '@emotion/react'
-import { theme } from './design/theme'
 
 import './index.css'
 import { ExercisePage } from './pages/ExercisePage'
@@ -18,16 +17,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <App>
-            <Routes>
-              <Route path="/exercises" element={<ExercisePage />} />
-              <Route path="/account" element={<>Account</>} />
-              <Route path="/" element={<>Home</>} />
-            </Routes>
-          </App>
-        </ThemeProvider>
+        <App />
       </Provider>
     </Router>
   </React.StrictMode>,
