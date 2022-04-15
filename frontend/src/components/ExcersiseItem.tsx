@@ -1,5 +1,6 @@
-import { Paper, Stack } from '@mui/material'
+import { Stack } from '@mui/material'
 import { Exercise } from '../types'
+import { Paper } from './Paper'
 import { Heading, Paragraph } from './typography'
 
 export const ExerciseItem = ({

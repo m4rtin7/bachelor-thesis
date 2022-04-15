@@ -1,7 +1,8 @@
-import { Tab, Tabs, Stack, Paper, Button } from '@mui/material'
+import { Tab, Tabs, Stack, Button } from '@mui/material'
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import CodeEditor from '@uiw/react-textarea-code-editor'
+import { Paper } from './Paper'
 
 type CodePaperProps = {
   code: string

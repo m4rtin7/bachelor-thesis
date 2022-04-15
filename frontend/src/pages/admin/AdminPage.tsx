@@ -1,7 +1,7 @@
-import { Stack, Typography, TextField, Button, Box } from '@mui/material'
+import { Stack, Typography, TextField, Box } from '@mui/material'
 import { useEffect, useState } from 'react'
 import Split from 'react-split'
-import { Monaco } from '../../components'
+import { Button, Monaco } from '../../components'
 import { Dropdown } from '../../components/Dropdown'
 import { VERSIONS } from '../../consts'
 import {
@@ -91,14 +91,9 @@ export const AdminPage = ({
           placeholder="Title"
           sx={{ flexGrow: 1 }}
         />
-        <Button variant="contained" onClick={handleSubmit}>
-          Submit
-        </Button>
-        <Button variant="contained" onClick={onBack}>
-          Back
-        </Button>
+        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={onBack}>Back</Button>
         <Button
-          variant="contained"
           disabled={isLoadingLeft || isLoadingRight}
           onClick={() => {
             onTestLeft()
@@ -143,11 +138,7 @@ export const AdminPage = ({
                 items={VERSIONS}
                 onChange={setLeftVersion}
               />
-              <Button
-                variant="contained"
-                onClick={onTestLeft}
-                disabled={isLoadingLeft}
-              >
+              <Button onClick={onTestLeft} disabled={isLoadingLeft}>
                 Test
               </Button>
             </Stack>
@@ -174,11 +165,7 @@ export const AdminPage = ({
                 items={VERSIONS}
                 onChange={setRightVersion}
               />
-              <Button
-                variant="contained"
-                onClick={onTestRight}
-                disabled={isLoadingRight}
-              >
+              <Button onClick={onTestRight} disabled={isLoadingRight}>
                 Test
               </Button>
             </Stack>

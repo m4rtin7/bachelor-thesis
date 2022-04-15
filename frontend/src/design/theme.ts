@@ -9,14 +9,14 @@ export const darkTheme: ThemeOptions = {
     },
     secondary: {
       main: '#f50057',
-      contrastText: '#000',
+      contrastText: '#fff',
     },
     background: {
       default: '#000',
-      paper: '#424242',
+      paper: '#ffffff',
     },
     text: {
-      primary: '#fff',
+      primary: '#ffffff',
     },
   },
   spacing: 4,
@@ -35,10 +35,10 @@ export const lightTheme: ThemeOptions = {
     },
     background: {
       default: '#fff',
-      paper: '#424242',
+      paper: '#000000',
     },
     text: {
-      primary: '#000',
+      primary: '#000000',
     },
   },
   spacing: 4,
