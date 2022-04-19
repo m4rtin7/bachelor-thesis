@@ -2,10 +2,10 @@
  
 bool startsWith(std::string str, char ch)
 {
-    return false;
+    return str.starts_with(ch);
 }
 
 bool endsWith(std::string str, char ch)
 {
-    return false;
+    return str.ends_with(ch);
 }

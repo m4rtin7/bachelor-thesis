@@ -61,7 +61,7 @@ const test = async (req, res) => {
   } finally {
     if (fs.existsSync(newFolderPath)) {
       fs.rm(newFolderPath, { recursive: true, force: true })
-      removeDockerImage(folderName)
+      // removeDockerImage(folderName)
     }
   }
 }

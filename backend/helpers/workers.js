@@ -3,9 +3,13 @@ const path = require('path')
 const { exec } = require('child_process')
 const { makeFile } = require('./fileSystem')
 const { exercise } = require('../database/queries')
+const { getIdFromToken } = require('../auth/auth')
+const { isPassedResult } = require('./passedResult')
+const { addResult } = require('../database/model/result')
 
 let workers = []
 let queue = []
+let savedResults = []
 
 const makeWorkers = (numberOfWorkers) => {
   for (i = 0; i < numberOfWorkers; i++) {
@@ -32,15 +36,10 @@ const makeWorkers = (numberOfWorkers) => {
 }
 
 const passTaskToWorker = async (req, res) => {
-  //   console.log('res: ', res)
-  /**
-   * id_ulohy
-   * version
-   * code
-   * id_uzivatela
-   */
-  const taskData = req.body
-  console.log(workers)
+  const taskData = {
+    ...req.body,
+    userId: await getIdFromToken(req.headers['x-access-token']),
+  }
 
   const worker = workers.pop()
 
@@ -53,22 +52,24 @@ const passTaskToWorker = async (req, res) => {
 
 const runTests = async (worker, taskData, res) => {
   const r = await executeTests(worker, taskData)
-  // console.log(r)
+  console.log(taskData)
   fs.readFile(
     path.join(__dirname, `../docker/workers/${worker}/result.txt`),
     'utf8',
     function (err, result) {
-      console.log('r: ', r)
-      console.log('result: ', result)
-      res.send(
-        JSON.stringify(
-          result ===
-            'Command failed: docker exec worker1 bash -c "cd test && cmake -S . -B build && cmake --build build && ./build/solution> result.txt"\n"' ||
-            result === undefined
-            ? r
-            : result
-        )
-      )
+      const resp =
+        result ===
+          'Command failed: docker exec worker1 bash -c "cd test && cmake -S . -B build && cmake --build build && ./build/solution> result.txt"\n"' ||
+        result === undefined
+          ? r
+          : result
+
+      // console.log('RESPONSE: ', resp)
+      // console.log('ERROR: ', err)
+
+      if (taskData.save) saveResult({ ...taskData, result })
+
+      res.send(JSON.stringify(resp))
     }
   )
 
@@ -126,6 +127,43 @@ const executeTests = async (worker, taskData) => {
   })
 }
 
+const saveResult = async (taskData) => {
+  console.log(savedResults, 'HERE')
+  const otherResultIndex = savedResults.findIndex(
+    (r) =>
+      r.id === taskData.id &&
+      r.userId === taskData.userId &&
+      r.left !== taskData.left
+  )
+
+  if (otherResultIndex === -1) {
+    savedResults.push(taskData)
+    return
+  }
+
+  const otherResult = savedResults.splice(otherResultIndex, 1)[0]
+
+  console.log(
+    'PASSED: ',
+    isPassedResult(taskData.result),
+    isPassedResult(otherResult.result)
+  )
+
+  const result = {
+    exerciseId: taskData.id,
+    userId: taskData.userId,
+    leftCode: taskData.left ? taskData.code : otherResult.code,
+    leftResult: taskData.left ? taskData.result : otherResult.result,
+    rightCode: taskData.left ? otherResult.code : taskData.code,
+    rightResult: taskData.left ? otherResult.result : taskData.result,
+    passed:
+      isPassedResult(taskData.result) && isPassedResult(otherResult.result),
+  }
+
+  console.log('DLZKA: ', savedResults.length)
+
+  addResult(result)
+}
 module.exports = {
   makeWorkers,
   workers,

@@ -6,17 +6,22 @@ const database = require('./database/queries.js')
 
 const app = express()
 const bodyParser = require('body-parser')
+const { varifyJWT } = require('./auth/auth')
 
 app.use(cors())
 
 const jsonParser = bodyParser.json()
 
-app.post('/test', jsonParser, workers.passTaskToWorker)
+app.post('/test', jsonParser, varifyJWT, workers.passTaskToWorker)
 
-app.get('/exercises', database.exercise.getAll)
+app.get('/exercises', varifyJWT, database.exercise.getAll)
 
-app.post('/exercise', jsonParser, database.exercise.add)
-app.get('/exercise', jsonParser, database.exercise.get)
+app.post('/exercise', varifyJWT, jsonParser, database.exercise.add)
+app.get('/exercise', varifyJWT, jsonParser, database.exercise.get)
+app.put('/saveExercise', varifyJWT, jsonParser, database.exercise.save)
+app.post('/savedExercise', varifyJWT, jsonParser, database.exercise.getSaved)
+
+app.post('/login', jsonParser, database.user.login)
 
 const port = process.env.PORT || 3001
 app.listen(port, () => {

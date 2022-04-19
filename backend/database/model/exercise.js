@@ -1,4 +1,5 @@
 const { pool } = require('../database')
+const { getIdFromToken } = require('../../auth/auth')
 
 const getAll = async (_req, res) => {
   console.log('HERE')
@@ -64,9 +65,45 @@ const add = async (req, res) => {
   )
 }
 
+const save = async (req, res) => {
+  const { id: exerciseId, leftcode: leftCode, rightcode: rightCode } = req.body
+  const userId = await getIdFromToken(req.headers['x-access-token'])
+  console.log(req.body)
+
+  await pool.query(
+    `INSERT INTO saved_exercises (exercise_id, user_id, left_code, right_code) VALUES ($1, $2, $3, $4) 
+    ON CONFLICT ON CONSTRAINT exercise_user_unique 
+    DO UPDATE SET left_code = $3, right_code = $4 
+    `,
+    [exerciseId, userId, leftCode, rightCode],
+    (error) => {
+      if (error) res.status(400).send(error.message)
+      else res.status(200).send({ message: 'Insertion was successful' })
+    }
+  )
+}
+
+const getSaved = async (req, res) => {
+  const { id: exerciseId } = req.body
+  const userId = await getIdFromToken(req.headers['x-access-token'])
+
+  console.log(exerciseId, userId)
+
+  await pool.query(
+    `SELECT * FROM saved_exercises WHERE exercise_id = $1 AND user_id = $2`,
+    [exerciseId, userId],
+    (error, result) => {
+      if (error) res.status(400).send(error.message)
+      else res.send(result.rows[0])
+    }
+  )
+}
+
 module.exports = {
   getAll,
   add,
   get,
   _get,
+  save,
+  getSaved,
 }

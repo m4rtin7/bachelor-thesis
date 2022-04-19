@@ -1,5 +1,3 @@
-const e = require('express')
-
 module.exports.validOutputFile = function validOutputFile(s) {
   const lines = s.split('\n')
   if (
