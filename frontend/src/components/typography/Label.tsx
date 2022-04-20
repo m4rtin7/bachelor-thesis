@@ -1,10 +1,4 @@
-import {
-  Theme,
-  Typography,
-  styled,
-  useTheme,
-  TypographyProps,
-} from '@mui/material'
+import { Typography, styled, TypographyProps } from '@mui/material'
 
 type LabelSize = 'small' | 'medium' | 'large'
 
@@ -20,18 +14,14 @@ const sizeMap: { [key in LabelSize]: string } = {
 }
 
 const StyledTypography = styled(Typography)(
-  ({ theme, size }: { theme: Theme; size: LabelSize }) => ({
-    // color: theme.palette.text.primary,
+  ({ size }: { size: LabelSize }) => ({
     fontWeight: 'bold',
     textTransform: 'uppercase',
     fontSize: sizeMap[size],
   })
 )
-export const Label = ({ size = 'large', children, ...props }: LabelProps) => {
-  const theme = useTheme()
-  return (
-    <StyledTypography size={size} theme={theme} {...props}>
-      {children}
-    </StyledTypography>
-  )
-}
+export const Label = ({ size = 'large', children, ...props }: LabelProps) => (
+  <StyledTypography size={size} {...props}>
+    {children}
+  </StyledTypography>
+)

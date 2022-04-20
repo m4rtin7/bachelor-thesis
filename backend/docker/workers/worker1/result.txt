@@ -21,5 +21,5 @@ Running main() from gtest_main.cc
 [----------] 8 tests from TestyPrvejUlohy (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 8 tests from 1 test case ran. (1 ms total)
+[==========] 8 tests from 1 test case ran. (0 ms total)
 [  PASSED  ] 8 tests.

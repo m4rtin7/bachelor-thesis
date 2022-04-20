@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { exerciseApi } from '../features/exercisesApi'
+import { accountApi } from '../features/accountApi'
 import loggedReducer from '../features/loggedSlice'
 import designReducer from '../features/designSlice'
 
@@ -8,6 +9,7 @@ export const store = configureStore({
     logged: loggedReducer,
     design: designReducer,
     [exerciseApi.reducerPath]: exerciseApi.reducer,
+    [accountApi.reducerPath]: accountApi.reducer,
   },
 })
 

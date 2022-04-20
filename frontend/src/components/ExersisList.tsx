@@ -4,22 +4,13 @@ import { ExerciseItem } from './ExcersiseItem'
 
 type ExerciseListProps = {
   exercises: Exercise[]
-  setId: (id: number | undefined) => void
 }
 
-export const ExerciseList = ({ exercises, setId }: ExerciseListProps) => {
+export const ExerciseList = ({ exercises }: ExerciseListProps) => {
   return (
     <Stack spacing={2}>
       {exercises.map((exercise, index) => {
-        return (
-          <ExerciseItem
-            key={index}
-            exercise={exercise}
-            onClick={() => {
-              setId(index)
-            }}
-          />
-        )
+        return <ExerciseItem key={index} exercise={exercise} id={exercise.id} />
       })}
     </Stack>
   )

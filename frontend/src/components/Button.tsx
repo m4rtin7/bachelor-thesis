@@ -14,12 +14,18 @@ const StyleButton = styled(MuiButton)(({ theme }) => ({
   },
 }))
 
-type ButtonProps = { children: string } & MuiButtonProps
+type ButtonProps = { children: string; loading?: boolean } & MuiButtonProps
 
 export const Button = ({
   children,
   variant = 'contained',
+  loading = false,
+  disabled,
   ...props
 }: ButtonProps) => {
-  return <StyleButton {...props}>{children}</StyleButton>
+  return (
+    <StyleButton disabled={disabled || loading} {...props}>
+      {loading ? `${children}...` : children}
+    </StyleButton>
+  )
 }

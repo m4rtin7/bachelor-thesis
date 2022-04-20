@@ -1,12 +1,25 @@
-import { Box, Button, Stack } from '@mui/material'
+import { Button, Stack, Switch } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { setLogged } from '../../features/loggedSlice'
+import { Label } from '../typography'
 import { Menu } from './Menu'
 
-export const Header = () => {
+export const Header = ({
+  handleModeColor,
+}: {
+  handleModeColor: () => void
+}) => {
+  const dispatch = useDispatch()
+
   return (
     <Stack direction="row" justifyContent="space-between">
-      <Box />
+      <Stack direction="row">
+        <Label size="small">Light</Label>
+        <Switch onClick={handleModeColor} defaultChecked />
+        <Label size="small">Dark</Label>
+      </Stack>
       <Menu />
-      <Button> Log out </Button>
+      <Button onClick={() => dispatch(setLogged(false))}>Log out</Button>
     </Stack>
   )
 }

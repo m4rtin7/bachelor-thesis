@@ -16,4 +16,22 @@ export type Test = {
   code: string
   version: number
   test?: string
+  save?: boolean
+  left?: boolean
+}
+
+export type ExerciseToSave = {
+  id: number
+  leftcode: string
+  rightcode: string
+}
+
+export type Result = {
+  exerciseId: number
+  leftCode: string
+  rightCode: string
+  rightResult: string
+  leftResult: string
+  passed: boolean
+  savedOn: Date
 }

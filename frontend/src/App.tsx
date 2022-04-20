@@ -11,6 +11,7 @@ import { darkTheme, lightTheme } from './design/theme'
 import { CssBaseline } from '@mui/material'
 import { setMode } from './features/designSlice'
 import { LoginPage } from './pages/login/LoginPage'
+import { AdminPage } from './pages/admin/AdminPage'
 
 function App() {
   const logged = useSelector((state: RootState) => state.logged.value)
@@ -31,13 +32,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header />
-      <Button onClick={handleModeColor}>Switch</Button>
+      <Header handleModeColor={handleModeColor} />
       <Container maxWidth="xl" sx={{ mt: 8 }}>
         {logged ? (
           <Routes>
             <Route path="/exercises" element={<ExercisePage />} />
             <Route path="/account" element={<>Account</>} />
+            <Route path="/exercises/:id" element={<AdminPage />} />
             <Route path="/" element={<>Home</>} />
           </Routes>
         ) : (

@@ -3,7 +3,13 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Define a service using a base URL and expected endpoints
 export const accountApi = createApi({
   reducerPath: 'accountApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:5000',
+    prepareHeaders: (headers) => {
+      headers.set('x-access-token', localStorage.getItem('token') || '')
+      return headers
+    },
+  }),
   //mutations
   endpoints: (builder) => ({
     login: builder.mutation({

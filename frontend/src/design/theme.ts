@@ -12,7 +12,7 @@ export const darkTheme: ThemeOptions = {
       contrastText: '#fff',
     },
     background: {
-      default: '#000',
+      default: '#000000',
       paper: '#ffffff',
     },
     text: {
@@ -34,7 +34,7 @@ export const lightTheme: ThemeOptions = {
       contrastText: '#000',
     },
     background: {
-      default: '#fff',
+      default: '#ffffff',
       paper: '#000000',
     },
     text: {

@@ -1,4 +1,4 @@
-import { styled, Theme, Typography, useTheme } from '@mui/material'
+import { styled, Typography } from '@mui/material'
 
 type HeadingSize = 'h1' | 'h2' | 'h3' | 'h4'
 
@@ -14,18 +14,12 @@ const sizeMap: { [key in HeadingSize]: string } = {
   h4: '1.6rem',
 }
 const StyledTypography = styled(Typography)(
-  ({ theme, size }: { theme: Theme; size: HeadingSize }) => ({
-    color: theme.palette.text.primary,
+  ({ size }: { size: HeadingSize }) => ({
     fontWeight: 'bold',
     textTransform: 'uppercase',
     fontSize: sizeMap[size],
   })
 )
-export const Heading = ({ size = 'h3', children }: HeadingProps) => {
-  const theme = useTheme()
-  return (
-    <StyledTypography size={size} theme={theme}>
-      {children}
-    </StyledTypography>
-  )
-}
+export const Heading = ({ size = 'h3', children }: HeadingProps) => (
+  <StyledTypography size={size}>{children}</StyledTypography>
+)
