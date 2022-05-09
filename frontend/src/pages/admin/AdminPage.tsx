@@ -158,7 +158,6 @@ export const AdminPage = () => {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
             sx={{ flexGrow: 1 }}
-            disabled={true}
           />
           <Button onClick={handleSubmit}>Submit</Button>
           <Button onClick={handleSave}>Save</Button>

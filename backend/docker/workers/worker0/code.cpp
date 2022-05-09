@@ -1,11 +1,13 @@
-#include <string>
- 
-bool startsWith(std::string str, char ch)
+std::tuple<bool, bool, bool, bool> foo(
+    float a,
+    float b
+)
 {
-    return false;
-}
+    auto result = a <=> b;
 
-bool endsWith(std::string str, char ch)
-{
-    return false;
+    return std::make_tuple(
+        std::is_gt(result),
+        std::is_lt(result),
+        std::is_eq(result),
+        result == std::partial_ordering::unordered);
 }

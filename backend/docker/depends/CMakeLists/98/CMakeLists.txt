@@ -10,14 +10,14 @@ set(SOURCE_FILES
        
         tests.cpp
 
-        GoogleTest/gtest-death-test.cc
-        GoogleTest/gtest-filepath.cc
-        GoogleTest/gtest-port.cc
-        GoogleTest/gtest-printers.cc
-        GoogleTest/gtest-test-part.cc
-        GoogleTest/gtest-typed-test.cc
-        GoogleTest/gtest.cc
-        GoogleTest/gtest_main.cc)
+        ../GoogleTest/gtest-death-test.cc
+        ../GoogleTest/gtest-filepath.cc
+        ../GoogleTest/gtest-port.cc
+        ../GoogleTest/gtest-printers.cc
+        ../GoogleTest/gtest-test-part.cc
+        ../GoogleTest/gtest-typed-test.cc
+        ../GoogleTest/gtest.cc
+        ../GoogleTest/gtest_main.cc)
 
 include_directories(GoogleTest)
 add_executable(solution ${SOURCE_FILES})

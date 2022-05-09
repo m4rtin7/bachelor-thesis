@@ -3,39 +3,33 @@
 #include <iostream>
 #include "gtest/gtest.h"
 #include "code.cpp"
+#include "cmath"
+#include "tuple"
 
 using namespace ::testing;
 
 //Uloha 1.
-TEST(TestyPrvejUlohy, Jedna)
+TEST(TestyPrvejUlohy, 1)
 {
-    ASSERT_EQ(startsWith("a", 'b'), false);
+    ASSERT_EQ(foo(1,0), std::make_tuple(1,0,0,0));
 }
-TEST(TestyPrvejUlohy, Dva)
+TEST(TestyPrvejUlohy, 2)
 {
-    ASSERT_EQ(startsWith("a",'a'), true);
+    ASSERT_EQ(foo(0,1), std::make_tuple(0,1,0,0));
 }
-TEST(TestyPrvejUlohy, Dlhy)
+TEST(TestyPrvejUlohy, 3)
 {
-    ASSERT_EQ(startsWith("abbbbb",'a'), true);
+    ASSERT_EQ(foo(0,0), std::make_tuple(0,0,1,0));
 }
-TEST(TestyPrvejUlohy, Prazdny)
+TEST(TestyPrvejUlohy, 4)
 {
-    ASSERT_EQ(startsWith("",'a'), false);
+    ASSERT_EQ(foo(sqrt(-1), 1), std::make_tuple(0,0,0,1));
 }
-TEST(TestyPrvejUlohy, JednaNekonci)
+TEST(TestyPrvejUlohy, 5)
 {
-    ASSERT_EQ(endsWith("a", 'b'), false);
+    ASSERT_EQ(foo(1, sqrt(-1)), std::make_tuple(0,0,0,1));
 }
-TEST(TestyPrvejUlohy, DvaKonci)
+TEST(TestyPrvejUlohy, 6)
 {
-    ASSERT_EQ(endsWith("a",'a'), true);
-}
-TEST(TestyPrvejUlohy, DlhyKonci)
-{
-    ASSERT_EQ(endsWith("bbbbbbba",'a'), true);
-}
-TEST(TestyPrvejUlohy, PrazdnyNekonci)
-{
-    ASSERT_EQ(endsWith("",'a'), false);
+    ASSERT_EQ(foo(sqrt(-1), sqrt(-1)), std::make_tuple(0,0,0,1));
 }

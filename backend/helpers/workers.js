@@ -98,6 +98,8 @@ const executeTests = async (worker, taskData) => {
     test
   )
 
+  console.log('VERZIA: ', taskData.version)
+
   const cmakePath = path.join(
     __dirname,
     `../docker/depends/CMakeLists/${taskData.version}/CMakeLists.txt`
