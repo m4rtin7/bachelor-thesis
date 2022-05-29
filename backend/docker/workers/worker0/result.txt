@@ -1,0 +1,47 @@
+Running main() from gtest_main.cc
+[==========] Running 5 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 5 tests from TestyPrvejUlohy
+[ RUN      ] TestyPrvejUlohy.countl_0
+/test/tests.cpp:13: Failure
+      Expected: countl_0(0)
+      Which is: 0
+To be equal to: 8
+[  FAILED  ] TestyPrvejUlohy.countl_0 (0 ms)
+[ RUN      ] TestyPrvejUlohy.countl_1
+/test/tests.cpp:25: Failure
+      Expected: countl_1(128)
+      Which is: 0
+To be equal to: 1
+[  FAILED  ] TestyPrvejUlohy.countl_1 (0 ms)
+[ RUN      ] TestyPrvejUlohy.countr_0
+/test/tests.cpp:32: Failure
+      Expected: countr_0(0)
+      Which is: 0
+To be equal to: 8
+[  FAILED  ] TestyPrvejUlohy.countr_0 (0 ms)
+[ RUN      ] TestyPrvejUlohy.countr_1
+/test/tests.cpp:42: Failure
+      Expected: countr_1(1)
+      Which is: 0
+To be equal to: 1
+[  FAILED  ] TestyPrvejUlohy.countr_1 (0 ms)
+[ RUN      ] TestyPrvejUlohy.count_1
+/test/tests.cpp:51: Failure
+      Expected: count_1(1)
+      Which is: 0
+To be equal to: 1
+[  FAILED  ] TestyPrvejUlohy.count_1 (0 ms)
+[----------] 5 tests from TestyPrvejUlohy (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test case ran. (1 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 5 tests, listed below:
+[  FAILED  ] TestyPrvejUlohy.countl_0
+[  FAILED  ] TestyPrvejUlohy.countl_1
+[  FAILED  ] TestyPrvejUlohy.countr_0
+[  FAILED  ] TestyPrvejUlohy.countr_1
+[  FAILED  ] TestyPrvejUlohy.count_1
+
+ 5 FAILED TESTS

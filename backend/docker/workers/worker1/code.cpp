@@ -1,7 +1,5 @@
-std::tuple<bool, bool, bool, bool> foo(
-    float a,
-    float b
-)
+template <typename... Args>
+auto sum(Args... xs)
 {
-    return std::make_tuple(0, 0, 0, 0);
+    return (xs + ...);
 }

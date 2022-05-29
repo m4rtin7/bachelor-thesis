@@ -10,8 +10,6 @@ type CodePaperProps = {
 }
 
 export const CodePaper = ({ code, tests }: CodePaperProps) => {
-  console.log(tests)
-
   const [card, setCard] = useState<string>('code')
   return (
     <Box sx={{ width: '50%' }}>

@@ -9,7 +9,6 @@ CREATE TABLE exercises (
     version_right int NOT NULL,
     left_code text NOT NULL,
     right_code text,
-    edit_left boolean NOT NULL,
     test text NOT NULL,
     deadline DATE
 );
@@ -32,7 +31,10 @@ CREATE TABLE results (
     left_result text,
     right_result text,
     passed boolean,
-    saved_on DATE
+    saved_on DATE,
+    CONSTRAINT fk_exercise
+    FOREIGN KEY(exercise_id)
+    REFERENCES exercises(id)
 );
 
 CREATE TABLE saved_exercises (

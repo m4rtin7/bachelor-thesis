@@ -1,60 +1,15 @@
 Running main() from gtest_main.cc
-[==========] Running 6 tests from 1 test case.
+[==========] Running 3 tests from 1 test case.
 [----------] Global test environment set-up.
-[----------] 6 tests from TestyPrvejUlohy
-[ RUN      ] TestyPrvejUlohy.1
-/test/tests.cpp:14: Failure
-      Expected: foo(1,0)
-      Which is: (false, false, false, false)
-To be equal to: std::make_tuple(1,0,0,0)
-      Which is: (1, 0, 0, 0)
-[  FAILED  ] TestyPrvejUlohy.1 (0 ms)
-[ RUN      ] TestyPrvejUlohy.2
-/test/tests.cpp:18: Failure
-      Expected: foo(0,1)
-      Which is: (false, false, false, false)
-To be equal to: std::make_tuple(0,1,0,0)
-      Which is: (0, 1, 0, 0)
-[  FAILED  ] TestyPrvejUlohy.2 (0 ms)
-[ RUN      ] TestyPrvejUlohy.3
-/test/tests.cpp:22: Failure
-      Expected: foo(0,0)
-      Which is: (false, false, false, false)
-To be equal to: std::make_tuple(0,0,1,0)
-      Which is: (0, 0, 1, 0)
-[  FAILED  ] TestyPrvejUlohy.3 (0 ms)
-[ RUN      ] TestyPrvejUlohy.4
-/test/tests.cpp:26: Failure
-      Expected: foo(sqrt(-1), 1)
-      Which is: (false, false, false, false)
-To be equal to: std::make_tuple(0,0,0,1)
-      Which is: (0, 0, 0, 1)
-[  FAILED  ] TestyPrvejUlohy.4 (0 ms)
-[ RUN      ] TestyPrvejUlohy.5
-/test/tests.cpp:30: Failure
-      Expected: foo(1, sqrt(-1))
-      Which is: (false, false, false, false)
-To be equal to: std::make_tuple(0,0,0,1)
-      Which is: (0, 0, 0, 1)
-[  FAILED  ] TestyPrvejUlohy.5 (1 ms)
-[ RUN      ] TestyPrvejUlohy.6
-/test/tests.cpp:34: Failure
-      Expected: foo(sqrt(-1), sqrt(-1))
-      Which is: (false, false, false, false)
-To be equal to: std::make_tuple(0,0,0,1)
-      Which is: (0, 0, 0, 1)
-[  FAILED  ] TestyPrvejUlohy.6 (0 ms)
-[----------] 6 tests from TestyPrvejUlohy (1 ms total)
+[----------] 3 tests from TestPrvejUlohy
+[ RUN      ] TestPrvejUlohy.styri
+[       OK ] TestPrvejUlohy.styri (0 ms)
+[ RUN      ] TestPrvejUlohy.jedno
+[       OK ] TestPrvejUlohy.jedno (0 ms)
+[ RUN      ] TestPrvejUlohy.zaporne
+[       OK ] TestPrvejUlohy.zaporne (0 ms)
+[----------] 3 tests from TestPrvejUlohy (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 6 tests from 1 test case ran. (1 ms total)
-[  PASSED  ] 0 tests.
-[  FAILED  ] 6 tests, listed below:
-[  FAILED  ] TestyPrvejUlohy.1
-[  FAILED  ] TestyPrvejUlohy.2
-[  FAILED  ] TestyPrvejUlohy.3
-[  FAILED  ] TestyPrvejUlohy.4
-[  FAILED  ] TestyPrvejUlohy.5
-[  FAILED  ] TestyPrvejUlohy.6
-
- 6 FAILED TESTS
+[==========] 3 tests from 1 test case ran. (0 ms total)
+[  PASSED  ] 3 tests.

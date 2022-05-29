@@ -1,35 +1,26 @@
 // Copyright 2005, Google Inc.
 // All rights reserved.
+
 #include <iostream>
 #include "gtest/gtest.h"
-#include "code.cpp"
-#include "cmath"
-#include "tuple"
 
+#include "code.cpp"
+
+using namespace std;
 using namespace ::testing;
 
-//Uloha 1.
-TEST(TestyPrvejUlohy, 1)
+// Uloha 1.
+TEST(TestPrvejUlohy, styri)
 {
-    ASSERT_EQ(foo(1,0), std::make_tuple(1,0,0,0));
+  ASSERT_EQ(10, sum(1, 2, 3, 4));
 }
-TEST(TestyPrvejUlohy, 2)
+
+TEST(TestPrvejUlohy, jedno)
 {
-    ASSERT_EQ(foo(0,1), std::make_tuple(0,1,0,0));
+  ASSERT_EQ(1, sum(1));
 }
-TEST(TestyPrvejUlohy, 3)
+
+TEST(TestPrvejUlohy, zaporne)
 {
-    ASSERT_EQ(foo(0,0), std::make_tuple(0,0,1,0));
-}
-TEST(TestyPrvejUlohy, 4)
-{
-    ASSERT_EQ(foo(sqrt(-1), 1), std::make_tuple(0,0,0,1));
-}
-TEST(TestyPrvejUlohy, 5)
-{
-    ASSERT_EQ(foo(1, sqrt(-1)), std::make_tuple(0,0,0,1));
-}
-TEST(TestyPrvejUlohy, 6)
-{
-    ASSERT_EQ(foo(sqrt(-1), sqrt(-1)), std::make_tuple(0,0,0,1));
+  ASSERT_EQ(-4, sum(1, -5));
 }
