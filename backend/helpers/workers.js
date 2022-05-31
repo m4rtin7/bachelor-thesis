@@ -6,6 +6,7 @@ const { exercise } = require('../database/queries')
 const { getIdFromToken } = require('../auth/auth')
 const { isPassedResult } = require('./passedResult')
 const { addResult } = require('../database/model/result')
+const { validOutputFile } = require('./validOutputFile')
 
 let workers = []
 let queue = []
@@ -59,10 +60,10 @@ const runTests = async (worker, taskData, res) => {
     function (err, result) {
       const resp =
         result ===
-          'Command failed: docker exec worker1 bash -c "cd test && cmake -S . -B build && cmake --build build && ./build/solution> result.txt"\n"' ||
+          `Command failed: docker exec ${worker} bash -c "cd test && cmake -S . -B build && cmake --build build && ./build/solution> result.txt"\n"` ||
         result === undefined
           ? r
-          : result
+          : validOutputFile(result)
 
       // console.log('RESPONSE: ', resp)
       // console.log('ERROR: ', err)

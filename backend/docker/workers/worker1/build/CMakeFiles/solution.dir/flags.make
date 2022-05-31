@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/test/../GoogleTest
 
-CXX_FLAGS = -std=gnu++14
+CXX_FLAGS = -std=gnu++20
 

@@ -5,5 +5,5 @@ module.exports.validOutputFile = function validOutputFile(s) {
     lines[lines.length - 2].includes('PASS')
   )
     return s
-  else return s + 'PREKROCIL SI CASOVY LIMIT NA TESTY\n'
+  else return s + 'TESTS RUN OUT OF TIME!\n'
 }

@@ -29,6 +29,8 @@ app.post(
 )
 
 app.post('/login', jsonParser, database.user.login)
+app.post('/registration', jsonParser, database.user.registration)
+app.post('/resetPassword', jsonParser, database.user.resetPassword)
 
 const port = process.env.PORT || 3001
 app.listen(port, () => {
