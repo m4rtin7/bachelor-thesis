@@ -1,5 +1,21 @@
 Running main() from gtest_main.cc
-[==========] Running 3 tests from 1 test case.
+[==========] Running 6 tests from 1 test case.
 [----------] Global test environment set-up.
-[----------] 3 tests from TestPrvejUlohy
-[ RUN      ] TestPrvejUlohy.styri
+[----------] 6 tests from TestyPrvejUlohy
+[ RUN      ] TestyPrvejUlohy.1
+[       OK ] TestyPrvejUlohy.1 (0 ms)
+[ RUN      ] TestyPrvejUlohy.2
+[       OK ] TestyPrvejUlohy.2 (0 ms)
+[ RUN      ] TestyPrvejUlohy.3
+[       OK ] TestyPrvejUlohy.3 (0 ms)
+[ RUN      ] TestyPrvejUlohy.4
+[       OK ] TestyPrvejUlohy.4 (0 ms)
+[ RUN      ] TestyPrvejUlohy.5
+[       OK ] TestyPrvejUlohy.5 (0 ms)
+[ RUN      ] TestyPrvejUlohy.6
+[       OK ] TestyPrvejUlohy.6 (0 ms)
+[----------] 6 tests from TestyPrvejUlohy (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 1 test case ran. (1 ms total)
+[  PASSED  ] 6 tests.

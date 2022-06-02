@@ -1,5 +1,6 @@
 const { pool } = require('../database')
 const { getIdFromToken } = require('../../auth/auth')
+const { isAdmin } = require('./user')
 
 const getAll = async (_req, res) => {
   console.log('HERE')
@@ -89,7 +90,7 @@ const getSaved = async (req, res) => {
 
   console.log(exerciseId, userId)
 
-  await pool.query(
+  pool.query(
     `SELECT * FROM saved_exercises WHERE exercise_id = $1 AND user_id = $2`,
     [exerciseId, userId],
     (error, result) => {
@@ -99,11 +100,54 @@ const getSaved = async (req, res) => {
   )
 }
 
+const deleteExercise = async (req, res) => {
+  const { id: exerciseId, userId } = req.body
+  if (await isAdmin(userId))
+    pool.query(`DELETE FROM exercises WHERE id=$1`, [exerciseId])
+}
+
+const edit = async (req, res) => {
+  const {
+    id,
+    versionleft,
+    versionright,
+    title,
+    text,
+    leftcode,
+    rightcode,
+    editleft,
+    test,
+  } = req.body
+
+  await pool.query(
+    'UPDATE exercises SET versionleft=$1, versionright=$2, title=$3, text=$4, leftcode=$5, rightcode=$6, editleft=$7, test=$8) WHERE id =$9',
+    [
+      versionleft,
+      versionright,
+      title,
+      text,
+      leftcode,
+      rightcode,
+      editleft,
+      test,
+      id,
+    ],
+    (error) => {
+      if (error) {
+        console.log(error.message)
+        res.status(400).send(error.message)
+      } else res.status(200).send({ message: 'Update was successful' })
+    }
+  )
+}
+
 module.exports = {
   getAll,
   add,
   get,
+  edit,
   _get,
   save,
   getSaved,
+  deleteExercise,
 }

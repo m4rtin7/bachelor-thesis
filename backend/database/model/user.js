@@ -24,7 +24,13 @@ const login = async (req, res) => {
             .send({ auth: false, message: 'Bad email or password' })
           return
         }
-        const { password: encPassword, id, is_admin: isAdmin } = result.rows[0]
+        const {
+          password: encPassword,
+          id,
+          is_admin: isAdmin,
+          name,
+          surname,
+        } = result.rows[0]
         console.log('PASSWORDS: ', password, encPassword)
 
         const compare = await bcrypt.compare(password, encPassword)
@@ -36,7 +42,7 @@ const login = async (req, res) => {
             expiresIn: 86400000, //1 day
           })
 
-          res.json({ auth: true, token, isAdmin })
+          res.json({ auth: true, token, isAdmin, name, surname })
         } else {
           res
             .status(401)
@@ -149,8 +155,39 @@ const resetPassword = async (req, res) => {
   )
 }
 
+const update = async (req, res) => {
+  const { name, surname, password, userId: id } = req.body
+
+  console.log(req.body)
+
+  bcrypt.hash(password, 10, async (err, hashedPassword) => {
+    console.log(hashedPassword)
+    pool.query(
+      'UPDATE users SET name=$1, surname=$2, password=$3 WHERE id=$4',
+      [name, surname, hashedPassword, id],
+      async (error, _result) => {
+        console.log(error, err)
+        if (error || err) {
+          res
+            .status(400)
+            .send({ error: 'Unable to change user data, try it later' })
+        } else {
+          res.status(200).send()
+        }
+      }
+    )
+  })
+}
+
+const isAdmin = async (id) => {
+  const res = await pool.query('SELECT is_admin FROM users WHERE id=$1', [id])
+  return res ? res.rows[0]?.is_admin : false
+}
+
 module.exports = {
   login,
   registration,
   resetPassword,
+  update,
+  isAdmin,
 }
