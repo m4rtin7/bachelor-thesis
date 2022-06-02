@@ -1,8 +1,9 @@
-import { Dialog, styled } from '@mui/material'
+import { Dialog } from '@mui/material'
 import { useEffect } from 'react'
 import { useGetResultsByIdMutation } from '../features/exercisesApi'
 import { Result } from '../types'
 import { ResultList } from './result/ResultList'
+import { Label } from './typography'
 
 type ResultsModalProps = {
   open: boolean
@@ -10,14 +11,6 @@ type ResultsModalProps = {
   exerciseId: number
   handleLoadResult: (r: Result) => void
 }
-
-const StyledDialog = styled(Dialog)(({ theme }) => {
-  console.log(theme.palette.background.default)
-
-  return {
-    '&.MuiDialog-Paper': { backgroundColor: theme.palette.background.default },
-  }
-})
 
 export const ResultsModal = ({
   open,
@@ -31,11 +24,13 @@ export const ResultsModal = ({
     getResults(exerciseId)
   }, [exerciseId, getResults])
 
-  console.log('RESULTS: ', results)
-
   return (
-    <StyledDialog open={open} onClose={onClose} sx={{ color: '#000' }}>
-      <ResultList results={results} handleLoadResult={handleLoadResult} />
-    </StyledDialog>
+    <Dialog open={open} onClose={onClose}>
+      {results && results.length > 0 ? (
+        <ResultList results={results} handleLoadResult={handleLoadResult} />
+      ) : (
+        <Label sx={{ backgroundColor: 'transparent' }}>No data to show</Label>
+      )}
+    </Dialog>
   )
 }

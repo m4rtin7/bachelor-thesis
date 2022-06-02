@@ -1,6 +1,7 @@
-import { Button, Stack, Switch } from '@mui/material'
+import { Stack, Switch } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { setLogged } from '../../features/loggedSlice'
+import { Button } from '../Button'
 import { Label } from '../typography'
 import { Menu } from './Menu'
 

@@ -1,6 +1,4 @@
 import Editor from '@monaco-editor/react'
-import { useTheme } from '@mui/material'
-import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 
@@ -12,8 +10,6 @@ type EditorProps = {
 export const Monaco = ({ code, setCode }: EditorProps) => {
   const mode = useSelector((state: RootState) => state.design.mode)
 
-  console.log(mode)
-
   return (
     <Editor
       height="100%"
@@ -24,7 +20,7 @@ export const Monaco = ({ code, setCode }: EditorProps) => {
       onChange={(newValue, _) =>
         setCode ? setCode(newValue || '') : undefined
       }
-      options={{ minimap: { enabled: false } }}
+      options={{ minimap: { enabled: false }, readOnly: setCode === undefined }}
     />
   )
 }

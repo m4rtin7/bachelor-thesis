@@ -11,6 +11,11 @@ export const store = configureStore({
     [exerciseApi.reducerPath]: exerciseApi.reducer,
     [accountApi.reducerPath]: accountApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+      accountApi.middleware,
+      exerciseApi.middleware
+    ),
 })
 
 export type RootState = ReturnType<typeof store.getState>

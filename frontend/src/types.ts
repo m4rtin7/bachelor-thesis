@@ -8,7 +8,6 @@ export type Exercise = {
   rightcode: string
   editleft: boolean
   test: string
-  deadline: Date
 }
 
 export type Test = {

@@ -11,9 +11,11 @@ export const exerciseApi = createApi({
       return headers
     },
   }),
+  tagTypes: ['Exercises', 'Save'],
   endpoints: (builder) => ({
     getAllExercises: builder.query({
       query: () => ({ url: '/exercises', method: 'GET' }),
+      providesTags: ['Exercises'],
     }),
     //mutations
     saveExercise: builder.mutation({
@@ -22,6 +24,15 @@ export const exerciseApi = createApi({
         method: 'PUT',
         body: exercise,
       }),
+      invalidatesTags: ['Save'],
+    }),
+    deleteExercise: builder.mutation({
+      query: (id) => ({
+        url: '/exercise',
+        method: 'DELETE',
+        body: { id },
+      }),
+      invalidatesTags: ['Exercises'],
     }),
     getResultsById: builder.mutation({
       query: (id: number) => ({
@@ -36,6 +47,7 @@ export const exerciseApi = createApi({
         method: 'POST',
         body: { id },
       }),
+      invalidatesTags: ['Save'],
     }),
     addExercise: builder.mutation({
       query: (exercise: Exercise) => {
@@ -45,6 +57,7 @@ export const exerciseApi = createApi({
           body: exercise,
         }
       },
+      invalidatesTags: ['Exercises'],
     }),
     test: builder.mutation({
       query: (test: Test) => {
@@ -67,4 +80,5 @@ export const {
   useSaveExerciseMutation,
   useGetSavedExerciseMutation,
   useGetResultsByIdMutation,
+  useDeleteExerciseMutation,
 } = exerciseApi

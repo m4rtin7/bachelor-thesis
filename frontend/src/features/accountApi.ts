@@ -19,9 +19,40 @@ export const accountApi = createApi({
         body,
       }),
     }),
+    registration: builder.mutation({
+      query: (body: {
+        name: string
+        surname: string
+        email: string
+        password: string
+      }) => ({
+        url: '/registration',
+        method: 'POST',
+        body,
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (body: { email: string }) => ({
+        url: '/resetPassword',
+        method: 'POST',
+        body,
+      }),
+    }),
+    updateUser: builder.mutation({
+      query: (body: { name: string; surname: string; password: string }) => ({
+        url: '/updateUser',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation } = accountApi
+export const {
+  useLoginMutation,
+  useRegistrationMutation,
+  useResetPasswordMutation,
+  useUpdateUserMutation,
+} = accountApi

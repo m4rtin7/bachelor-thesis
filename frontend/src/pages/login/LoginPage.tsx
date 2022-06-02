@@ -2,8 +2,9 @@ import { Container, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Paper, TextInput } from '../../components'
+import { Link } from '../../components/Link'
 import { useLoginMutation } from '../../features/accountApi'
-import { setLogged } from '../../features/loggedSlice'
+import { setLogged, setIsAdmin, setUser } from '../../features/loggedSlice'
 
 export const LoginPage = () => {
   const dispatch = useDispatch()
@@ -17,9 +18,10 @@ export const LoginPage = () => {
     useLoginMutation()
 
   const handleSubmit = async () => {
-    console.log(email, password)
     login({ email, password })
   }
+
+  console.log(isError, error, loginData)
 
   useEffect(() => {
     if (error) {
@@ -31,10 +33,13 @@ export const LoginPage = () => {
 
       return
     }
+
     setErrorMessage(undefined)
     if (!loginData) return
     localStorage.setItem('token', loginData.token)
     dispatch(setLogged(true))
+    dispatch(setIsAdmin(loginData.isAdmin))
+    dispatch(setUser({ name: loginData?.name, surname: loginData?.surname }))
   }, [dispatch, isError, loginData, error])
 
   const handleEmailChange = (email: string) => {
@@ -66,7 +71,7 @@ export const LoginPage = () => {
             value={email}
             onChange={(e) => handleEmailChange(e.target.value)}
             error={!isMailValid}
-            helperText={!isMailValid ? 'Invalid e-mail address!' : undefined}
+            helperText={!isMailValid ? 'Invalid e-mail address!' : ''}
           />
           <TextInput
             label="password"
@@ -86,6 +91,10 @@ export const LoginPage = () => {
           {errorMessage && (
             <Typography color="error">{errorMessage}</Typography>
           )}
+          <Stack direction="row" justifyContent="space-between">
+            <Link href="/registration">No account yet? Sign up here!</Link>
+            <Link href="/resetPassword">Reset password</Link>
+          </Stack>
         </Stack>
       </Paper>
     </Container>

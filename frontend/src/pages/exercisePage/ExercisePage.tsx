@@ -1,30 +1,38 @@
 import { Stack, Typography, TextField, Box } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Split from 'react-split'
-import { Button, Monaco } from '../../components'
+import { Button, exerciseTemplate, Monaco } from '../../components'
 import { Dropdown } from '../../components/Dropdown'
 import { ResultsModal } from '../../components/ResultsModal'
 import { VERSIONS } from '../../consts'
 import {
   useAddExerciseMutation,
+  useDeleteExerciseMutation,
   useGetAllExercisesQuery,
   useGetSavedExerciseMutation,
   useSaveExerciseMutation,
   useTestMutation,
 } from '../../features/exercisesApi'
 import { Exercise, ExerciseToSave, Result } from '../../types'
+import { RootState } from '../../app/store'
 
-export const AdminPage = () => {
+export const ExercisePage = () => {
   const id = parseInt(useParams().id || '-1')
   const { data: exercisesData } = useGetAllExercisesQuery([])
-  const [exercise, setExercise] = useState<Exercise | undefined>(undefined)
+  const [exercise, setExercise] = useState<Exercise | undefined>(
+    id === -1 ? exerciseTemplate : undefined
+  )
+
+  const isAdmin = useSelector((state: RootState) => state.logged.isAdmin)
 
   const [title, setTitle] = useState<string>(exercise?.title || '')
   const [description, setDescription] = useState<string>(exercise?.text || '')
 
   const [getSavedExercise, { data: savedExerciseData }] =
     useGetSavedExerciseMutation()
+  const [deleteExercise] = useDeleteExerciseMutation()
 
   const [leftCode, setLeftCode] = useState<string>(exercise?.leftcode || '')
   const [leftVersion, setLeftVersion] = useState<number>(
@@ -51,10 +59,9 @@ export const AdminPage = () => {
   const [isResultModalOpen, setIsResultModalOpen] = useState<boolean>(false)
 
   useEffect(() => {
-    console.log(exercisesData, id)
-    const exx = exercisesData?.find((ex: Exercise) => ex.id === id)
-    console.log('exx: ', exx)
-    setExercise(exx)
+    if (id === -1) return
+    const exerciseById = exercisesData?.find((ex: Exercise) => ex.id === id)
+    setExercise(exerciseById)
 
     setTitle(exercise?.title || '')
     setDescription(exercise?.text || '')
@@ -82,8 +89,6 @@ export const AdminPage = () => {
   }, [rightResData])
 
   useEffect(() => {
-    console.log(savedExerciseData)
-
     if (savedExerciseData) {
       setLeftCode(savedExerciseData.left_code)
       setRightCode(savedExerciseData.right_code)
@@ -95,7 +100,7 @@ export const AdminPage = () => {
   }, [exercise?.id, getSavedExercise])
 
   const handleSubmit = () => {
-    const x: Exercise = {
+    addExercise({
       title,
       text: description,
       leftcode: leftCode,
@@ -104,10 +109,7 @@ export const AdminPage = () => {
       versionright: rightVersion,
       test,
       editleft: true,
-      deadline: new Date(),
-    }
-    addExercise(x)
-    console.log(JSON.stringify(x))
+    })
   }
 
   const handleSave = () => {
@@ -149,37 +151,48 @@ export const AdminPage = () => {
     setIsResultModalOpen(false)
   }
 
+  console.log('EXERCISE: ', exercise)
+
   return (
     <>
       <Stack sx={{ width: '100hw', height: '100vh' }}>
         <Stack direction="row">
           <TextField
-            value={title || exercise?.title}
+            value={title || exercise?.title || ''}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
             sx={{ flexGrow: 1 }}
           />
-          <Button onClick={handleSubmit}>Submit</Button>
-          <Button onClick={handleSave}>Save</Button>
-          <Button
-            disabled={isLoadingLeft || isLoadingRight}
-            onClick={() => {
-              onTestLeft(true)
-              onTestRight(true)
-            }}
-          >
-            Test
-          </Button>
-          <Button
-            disabled={isLoadingLeft || isLoadingRight}
-            onClick={() => setIsResultModalOpen(true)}
-          >
-            Show results
-          </Button>
+          {isAdmin && id === -1 && (
+            <Button onClick={handleSubmit}>Add exercise</Button>
+          )}
+          {id === -1 || <Button onClick={handleSave}>Save</Button>}
+          {id === -1 || (
+            <Button
+              disabled={isLoadingLeft || isLoadingRight}
+              onClick={() => {
+                onTestLeft(true)
+                onTestRight(true)
+              }}
+            >
+              Test
+            </Button>
+          )}
+          {id === -1 || (
+            <Button
+              disabled={isLoadingLeft || isLoadingRight}
+              onClick={() => setIsResultModalOpen(true)}
+            >
+              Show results
+            </Button>
+          )}
+          {isAdmin && id !== -1 && (
+            <Button onClick={() => deleteExercise(id)}>Delete exercise</Button>
+          )}
         </Stack>
         <TextField
           placeholder="description"
-          value={description}
+          value={description || ''}
           onChange={(e) => setDescription(e.target.value)}
         />
         <Split
@@ -190,7 +203,6 @@ export const AdminPage = () => {
           snapOffset={30}
           dragInterval={1}
           direction="horizontal"
-          cursor="col-resize"
           style={{ height: '100%', display: 'flex' }}
         >
           <Split
@@ -201,13 +213,13 @@ export const AdminPage = () => {
             snapOffset={30}
             dragInterval={1}
             direction="vertical"
-            cursor="col-resize"
             style={{ height: '100%' }}
           >
             <Box height={'100%'}>
               <Typography>Code</Typography>
               <Stack direction="row">
                 <Dropdown
+                  disabled={!isAdmin}
                   value={leftVersion}
                   items={VERSIONS}
                   onChange={setLeftVersion}
@@ -228,13 +240,13 @@ export const AdminPage = () => {
             snapOffset={30}
             dragInterval={1}
             direction="vertical"
-            cursor="col-resize"
             style={{ height: '100%' }}
           >
             <Box>
               <Typography>Code</Typography>
               <Stack direction="row">
                 <Dropdown
+                  disabled={!isAdmin}
                   value={rightVersion}
                   items={VERSIONS}
                   onChange={setRightVersion}
@@ -251,20 +263,14 @@ export const AdminPage = () => {
           </Split>
           <Box>
             <Typography>Tests</Typography>
-            {/* <Dropdown
-            value={testsVersion}
-            items={VERSIONS}
-            onChange={setTestVersion}
-          /> */}
-
-            <Monaco code={test} setCode={setTest} />
+            <Monaco code={test} setCode={isAdmin ? setTest : undefined} />
           </Box>
         </Split>
       </Stack>
       <ResultsModal
         open={isResultModalOpen}
         onClose={() => setIsResultModalOpen(false)}
-        exerciseId={exercise?.id || 0}
+        exerciseId={exercise?.id || -1}
         handleLoadResult={handleLoadResult}
       />
     </>

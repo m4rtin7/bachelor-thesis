@@ -11,7 +11,7 @@ export const ExerciseItem = ({
   exercise: Exercise
   id: number | undefined
 }) => {
-  const { title, text, deadline } = exercise
+  const { title, text } = exercise
   return (
     <Box
       component={Link}
@@ -19,23 +19,22 @@ export const ExerciseItem = ({
       sx={{ textDecoration: 'none' }}
     >
       <Paper
-        sx={{
+        sx={(theme) => ({
+          backgroundColor:
+            id === -1
+              ? `${theme.palette.primary.main}`
+              : `${theme.palette.background.paper}30`,
           cursor: 'pointer',
           '&:hover': { opacity: 0.8 },
           borderRadius: 0,
           py: 2,
           px: 4,
-        }}
+        })}
       >
         <Stack>
           <Heading>{title}</Heading>
           <Stack direction="row" justifyContent="space-between" spacing={4}>
             <Paragraph noWrap>{text}</Paragraph>
-            <Paragraph minWidth="fit-content">
-              {deadline
-                ? deadline.toTimeString()
-                : new Date('August 19, 1975 23:15:30').toDateString()}
-            </Paragraph>
           </Stack>
         </Stack>
       </Paper>
