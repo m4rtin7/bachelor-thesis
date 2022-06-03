@@ -45,3 +45,9 @@ CREATE TABLE saved_exercises (
     exercise_id int,
     CONSTRAINT exercise_user_unique UNIQUE (user_id, exercise_id)
 );
+
+CREATE TABLE CMakeFiles (
+    id serial,
+    version int,
+    text text,
+);

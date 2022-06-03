@@ -33,8 +33,6 @@ function App() {
     [mode]
   )
 
-  console.log('LOGGED: ', logged)
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -52,7 +50,10 @@ function App() {
           <Route path="/" element={<LoginPage />}></Route>
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/resetPassword" element={<ResetPasswordPage />}></Route>
-          <Route path="*" element={<>PAGE NOT FOUND</>}></Route>
+          <Route
+            path="*"
+            element={logged ? <>PAGE NOT FOUND</> : <LoginPage />}
+          ></Route>
         </Routes>
       </Container>
     </ThemeProvider>

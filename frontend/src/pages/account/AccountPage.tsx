@@ -19,7 +19,7 @@ export const AccountPage = () => {
     "Password can't be empty string"
   )
 
-  const [updateUser, { isLoading, error }] = useUpdateUserMutation()
+  const [updateUser, { isLoading }] = useUpdateUserMutation()
 
   const handleSubmit = async () => {
     updateUser({ name, surname, password: newPassword })
@@ -40,8 +40,6 @@ export const AccountPage = () => {
   useEffect(() => {
     setIsError(name === '' || surname === '')
   }, [name, surname])
-
-  console.log(isError, isLoading, error)
 
   return (
     <Container maxWidth="sm">

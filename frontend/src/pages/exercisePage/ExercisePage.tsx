@@ -10,6 +10,7 @@ import { VERSIONS } from '../../consts'
 import {
   useAddExerciseMutation,
   useDeleteExerciseMutation,
+  useEditExerciseMutation,
   useGetAllExercisesQuery,
   useGetSavedExerciseMutation,
   useSaveExerciseMutation,
@@ -33,6 +34,7 @@ export const ExercisePage = () => {
   const [getSavedExercise, { data: savedExerciseData }] =
     useGetSavedExerciseMutation()
   const [deleteExercise] = useDeleteExerciseMutation()
+  const [editExercise] = useEditExerciseMutation()
 
   const [leftCode, setLeftCode] = useState<string>(exercise?.leftcode || '')
   const [leftVersion, setLeftVersion] = useState<number>(
@@ -68,12 +70,16 @@ export const ExercisePage = () => {
     setLeftCode(savedExerciseData?.left_code || exercise?.leftcode || '')
     setRightCode(savedExerciseData?.right_code || exercise?.rightcode || '')
     setTest(exercise?.test || '')
+    setRightVersion(exercise?.versionright || 20)
+    setLeftVersion(exercise?.versionleft || 20)
   }, [
     exercise?.leftcode,
     exercise?.rightcode,
     exercise?.test,
     exercise?.text,
     exercise?.title,
+    exercise?.versionleft,
+    exercise?.versionright,
     exercisesData,
     id,
     savedExerciseData?.left_code,
@@ -151,8 +157,6 @@ export const ExercisePage = () => {
     setIsResultModalOpen(false)
   }
 
-  console.log('EXERCISE: ', exercise)
-
   return (
     <>
       <Stack sx={{ width: '100hw', height: '100vh' }}>
@@ -187,7 +191,30 @@ export const ExercisePage = () => {
             </Button>
           )}
           {isAdmin && id !== -1 && (
-            <Button onClick={() => deleteExercise(id)}>Delete exercise</Button>
+            <>
+              <Button onClick={() => deleteExercise(id)}>
+                Delete exercise
+              </Button>
+              <Button
+                onClick={() =>
+                  exercise
+                    ? editExercise({
+                        id,
+                        leftcode: leftCode,
+                        rightcode: rightCode,
+                        test,
+                        versionleft: leftVersion,
+                        versionright: rightVersion,
+                        title,
+                        text: description,
+                        editleft: true,
+                      })
+                    : undefined
+                }
+              >
+                Edit exercise
+              </Button>
+            </>
           )}
         </Stack>
         <TextField

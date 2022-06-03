@@ -34,6 +34,14 @@ export const exerciseApi = createApi({
       }),
       invalidatesTags: ['Exercises'],
     }),
+    editExercise: builder.mutation({
+      query: (exercise: Exercise) => ({
+        url: '/editExercise',
+        method: 'POST',
+        body: exercise,
+      }),
+      invalidatesTags: ['Exercises'],
+    }),
     getResultsById: builder.mutation({
       query: (id: number) => ({
         url: '/results',
@@ -81,4 +89,5 @@ export const {
   useGetSavedExerciseMutation,
   useGetResultsByIdMutation,
   useDeleteExerciseMutation,
+  useEditExerciseMutation,
 } = exerciseApi

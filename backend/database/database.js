@@ -5,7 +5,7 @@ const pool = new Pool({
   user: config['USER'],
   host: config['HOST'],
   database: config['DATABASE'],
-  password: config['PASSWORD'],
+  password: process.env.DB_PASSWORD,
   dialect: config['DIALECT'],
   port: config['PORT'],
 })

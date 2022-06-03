@@ -27,7 +27,6 @@ const makeWorkers = (numberOfWorkers) => {
 
     exec(cmd, (err, code) => {
       if (err) {
-        console.log(err.message)
       } else {
         console.log(worker, ' made')
         workers.push(worker)
@@ -53,7 +52,6 @@ const passTaskToWorker = async (req, res) => {
 
 const runTests = async (worker, taskData, res) => {
   const r = await executeTests(worker, taskData)
-  console.log(taskData)
   fs.readFile(
     path.join(__dirname, `../docker/workers/${worker}/result.txt`),
     'utf8',
@@ -64,9 +62,6 @@ const runTests = async (worker, taskData, res) => {
         result === undefined
           ? r
           : validOutputFile(result)
-
-      // console.log('RESPONSE: ', resp)
-      // console.log('ERROR: ', err)
 
       if (taskData.save) saveResult({ ...taskData, result })
 
@@ -91,15 +86,12 @@ const executeTests = async (worker, taskData) => {
   )
 
   const exerciseById = (await exercise._get(taskData.id)).rows[0]
-  console.log(taskData.id, exerciseById)
   const test = taskData.test || exerciseById.test
   makeFile(
     path.join(__dirname, `../docker/workers/${worker}`),
     'tests.cpp',
     test
   )
-
-  console.log('VERZIA: ', taskData.version)
 
   const cmakePath = path.join(
     __dirname,
@@ -110,8 +102,6 @@ const executeTests = async (worker, taskData) => {
     `../docker/workers/${worker}/CMakeLists.txt`
   )
 
-  console.log(worker)
-
   fs.copyFileSync(cmakePath, destPath)
 
   const cmd = `docker exec ${worker} bash -c "cd test ; rm result.txt ; cmake -S . -B build && cmake --build build && timeout 30 ./build/solution > result.txt"`
@@ -119,7 +109,6 @@ const executeTests = async (worker, taskData) => {
   return new Promise(function (resolve, reject) {
     exec(cmd, (err, code) => {
       if (err) {
-        // console.log(err)
         resolve(err.message)
       } else {
         resolve('')
@@ -131,7 +120,6 @@ const executeTests = async (worker, taskData) => {
 }
 
 const saveResult = async (taskData) => {
-  console.log(savedResults, 'HERE')
   const otherResultIndex = savedResults.findIndex(
     (r) =>
       r.id === taskData.id &&
@@ -146,12 +134,6 @@ const saveResult = async (taskData) => {
 
   const otherResult = savedResults.splice(otherResultIndex, 1)[0]
 
-  console.log(
-    'PASSED: ',
-    isPassedResult(taskData.result),
-    isPassedResult(otherResult.result)
-  )
-
   const result = {
     exerciseId: taskData.id,
     userId: taskData.userId,
@@ -162,8 +144,6 @@ const saveResult = async (taskData) => {
     passed:
       isPassedResult(taskData.result) && isPassedResult(otherResult.result),
   }
-
-  console.log('DLZKA: ', savedResults.length)
 
   addResult(result)
 }

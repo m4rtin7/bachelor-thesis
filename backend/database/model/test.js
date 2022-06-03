@@ -6,7 +6,6 @@ const { removeFirstLine } = require('../../helpers/removeFirstLine')
 const { validOutputFile } = require('../../helpers/validOutputFile')
 
 const test = async (req, res) => {
-  console.log(req.body)
   const body = req.body
   const dependsPath = path.resolve(__dirname, `./dockers/depends`)
   const folderName = body.userId.toString() + Date.now()
@@ -35,7 +34,6 @@ const test = async (req, res) => {
     errorMessage = removeFirstLine(err.message)
 
     if (errorMessage) {
-      console.log('ERROR')
       res.send({
         passed: false,
         file: JSON.stringify(errorMessage),
@@ -61,7 +59,6 @@ const test = async (req, res) => {
   } finally {
     if (fs.existsSync(newFolderPath)) {
       fs.rm(newFolderPath, { recursive: true, force: true })
-      // removeDockerImage(folderName)
     }
   }
 }

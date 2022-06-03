@@ -7,7 +7,7 @@ const { randomString } = require('../../helpers/generatePassword')
 const login = async (req, res) => {
   const { email, password } = req.body
 
-  await pool.query(
+  pool.query(
     'SELECT * FROM users WHERE email=$1',
     [email],
     async (error, result) => {
@@ -31,13 +31,10 @@ const login = async (req, res) => {
           name,
           surname,
         } = result.rows[0]
-        console.log('PASSWORDS: ', password, encPassword)
 
         const compare = await bcrypt.compare(password, encPassword)
-        console.log(password, compare)
 
         if (compare) {
-          console.log('PASSED')
           const token = jwt.sign({ id }, process.env.JTW_SECRET, {
             expiresIn: 86400000, //1 day
           })
@@ -55,7 +52,7 @@ const login = async (req, res) => {
 
 const registration = async (req, res) => {
   const { name, surname, email, password } = req.body
-  await pool.query(
+  pool.query(
     'SELECT * FROM users WHERE email=$1',
     [email],
     async (error, result) => {
@@ -71,11 +68,10 @@ const registration = async (req, res) => {
     }
   )
   bcrypt.hash(password, 10, async (err, hashedPassword) => {
-    await pool.query(
+    pool.query(
       'INSERT INTO users (name, surname, email, password, is_admin) VALUES ($1, $2, $3, $4, $5)',
       [name, surname, email, hashedPassword, false],
       async (error, _result) => {
-        console.log(error, err)
         if (error || err) {
           res
             .status(400)
@@ -102,7 +98,6 @@ const resetPassword = async (req, res) => {
         return
       } else {
         if (result.rows.length < 1) {
-          console.log('MENEJ 1')
           res.status(400).send({ error: "User with this email doesn't exist!" })
           return
         }
@@ -116,8 +111,6 @@ const resetPassword = async (req, res) => {
           },
         })
 
-        console.log(process.env.EMAIL, process.env.EMAIL_PASSWORD)
-
         const mailOptions = {
           from: process.env.EMAIL,
           to: userEmail,
@@ -127,7 +120,6 @@ const resetPassword = async (req, res) => {
 
         transporter.sendMail(mailOptions, function (error, _info) {
           if (error) {
-            console.log('ERROR: ', error)
             res
               .status(400)
               .send({ error: "User with this email doesn't exist!" })
@@ -145,7 +137,6 @@ const resetPassword = async (req, res) => {
                   .status(400)
                   .send({ error: 'Unable to change password, try it later' })
               }
-              console.log('HEREEEEE')
               res.status(200).send()
             }
           )
@@ -158,15 +149,11 @@ const resetPassword = async (req, res) => {
 const update = async (req, res) => {
   const { name, surname, password, userId: id } = req.body
 
-  console.log(req.body)
-
   bcrypt.hash(password, 10, async (err, hashedPassword) => {
-    console.log(hashedPassword)
     pool.query(
       'UPDATE users SET name=$1, surname=$2, password=$3 WHERE id=$4',
       [name, surname, hashedPassword, id],
       async (error, _result) => {
-        console.log(error, err)
         if (error || err) {
           res
             .status(400)

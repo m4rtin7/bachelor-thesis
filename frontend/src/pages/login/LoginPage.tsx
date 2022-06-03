@@ -21,8 +21,6 @@ export const LoginPage = () => {
     login({ email, password })
   }
 
-  console.log(isError, error, loginData)
-
   useEffect(() => {
     if (error) {
       const errorData =
@@ -49,6 +47,7 @@ export const LoginPage = () => {
       return
     }
     setIsMailValid(
+      // eslint-disable-next-line no-useless-escape
       /^[a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-z0-9]@[a-z0-9][-\.]{0,1}([a-z][-\.]{0,1})*[a-z0-9]\.[a-z0-9]{1,}([\.\-]{0,1}[a-z]){0,}[a-z0-9]{0,}$/.test(
         email
       )

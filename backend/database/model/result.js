@@ -29,7 +29,6 @@ const getUsersResultsByExerciseId = async (req, res) => {
       if (err) {
         res.status(400).send({ error: 'Failed to fetch from DB' })
       } else {
-        console.log(result.rows)
         res.status(200).send(JSON.stringify(camelcaseKeys(result.rows)))
       }
     }

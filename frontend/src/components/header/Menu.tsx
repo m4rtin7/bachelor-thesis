@@ -1,15 +1,19 @@
 import { Tabs, Tab } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { RootState } from '../../app/store'
 
 export const Menu = () => {
-  const [value, setValue] = useState<string>(
-    `/${window.location.pathname.split('/')?.[1] || ''}`
-  )
+  const location = useLocation()
+
+  const [value, setValue] = useState<string>('/')
 
   const isLogged = useSelector((state: RootState) => state.logged.logged)
+
+  useEffect(() => {
+    setValue(`/${location.pathname.split('/')[1]}`)
+  }, [location.pathname])
 
   return (
     <Tabs value={value} onChange={(e, v) => setValue(v)}>

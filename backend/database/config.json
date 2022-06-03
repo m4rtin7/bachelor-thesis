@@ -1,9 +1,8 @@
 {
   "DATABASE": {
-    "USER": "postgres",
-    "HOST": "localhost",
-    "DATABASE": "dbbp",
-    "PASSWORD": "admin",
+    "USER": "udjyfnpz",
+    "HOST": "abul.db.elephantsql.com",
+    "DATABASE": "udjyfnpz",
     "DIALECT": "postgres",
     "PORT": 5432
   }

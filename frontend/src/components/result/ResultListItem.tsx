@@ -9,8 +9,6 @@ export const ResultListItem = ({
   result: Result
   onClick: () => void
 }) => {
-  console.log(new Date(result.savedOn).toDateString())
-
   const StyledStack = styled(Stack)(({ theme }) => ({
     cursor: 'pointer',
     '&:hover': { opacity: 0.8 },

@@ -2951,31 +2951,7 @@ CMakeFiles/solution.dir/tests.cpp.o: ../tests.cpp \
   /GoogleTest/gtest/gtest-test-part.h \
   /GoogleTest/gtest/gtest-typed-test.h \
   /GoogleTest/gtest/gtest_pred_impl.h \
-  ../code.cpp \
-  /usr/local/include/c++/11.1.0/cmath \
-  /usr/include/math.h \
-  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
-  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
-  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
-  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
-  /usr/local/include/c++/11.1.0/bits/specfun.h \
-  /usr/local/include/c++/11.1.0/tr1/gamma.tcc \
-  /usr/local/include/c++/11.1.0/tr1/special_function_util.h \
-  /usr/local/include/c++/11.1.0/tr1/bessel_function.tcc \
-  /usr/local/include/c++/11.1.0/tr1/beta_function.tcc \
-  /usr/local/include/c++/11.1.0/tr1/ell_integral.tcc \
-  /usr/local/include/c++/11.1.0/tr1/exp_integral.tcc \
-  /usr/local/include/c++/11.1.0/tr1/hypergeometric.tcc \
-  /usr/local/include/c++/11.1.0/tr1/legendre_function.tcc \
-  /usr/local/include/c++/11.1.0/tr1/modified_bessel_func.tcc \
-  /usr/local/include/c++/11.1.0/tr1/poly_hermite.tcc \
-  /usr/local/include/c++/11.1.0/tr1/poly_laguerre.tcc \
-  /usr/local/include/c++/11.1.0/tr1/riemann_zeta.tcc
+  ../code.cpp
 
 
 /usr/local/include/c++/11.1.0/bits/allocated_ptr.h:

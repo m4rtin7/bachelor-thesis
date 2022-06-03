@@ -7,8 +7,7 @@ export const ResetPasswordPage = () => {
   const [email, setEmail] = useState<string>('')
   const [isMailValid, setIsMailValid] = useState<boolean>(true)
 
-  const [resetPassword, { isLoading, isError, error }] =
-    useResetPasswordMutation()
+  const [resetPassword, { isLoading }] = useResetPasswordMutation()
 
   const handleSubmit = async () => {
     resetPassword({ email })
@@ -21,13 +20,12 @@ export const ResetPasswordPage = () => {
       return
     }
     setIsMailValid(
+      // eslint-disable-next-line no-useless-escape
       /^[a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-z0-9]@[a-z0-9][-\.]{0,1}([a-z][-\.]{0,1})*[a-z0-9]\.[a-z0-9]{1,}([\.\-]{0,1}[a-z]){0,}[a-z0-9]{0,}$/.test(
         email
       )
     )
   }
-
-  console.log(isError, isLoading, error)
 
   return (
     <Container maxWidth="sm">

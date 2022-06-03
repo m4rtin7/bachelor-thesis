@@ -20,7 +20,6 @@ const varifyJWT = (req, res, next) => {
 const getIdFromToken = async (token) =>
   await jwt.verify(token, process.env.JTW_SECRET, (err, decoded) => {
     if (err) {
-      console.log(err)
       return undefined
     } else {
       return decoded.id
