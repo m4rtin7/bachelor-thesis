@@ -44,3 +44,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Spustenie
+
+`yarn install && yarn start` (je potrebne nainštalovať `yarn` ak ste tak ešte nespravili `npm install --global yarn`)
