@@ -1,0 +1,2 @@
+Pre instalaciu postupujte podla pokynov v README.md
+Link na GitHub: https://github.com/m4rtin7/bachelor-thesis
