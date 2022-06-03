@@ -3,33 +3,39 @@
 #include <iostream>
 #include "gtest/gtest.h"
 #include "code.cpp"
-#include "cmath"
-#include "tuple"
 
 using namespace ::testing;
 
 //Uloha 1.
-TEST(TestyPrvejUlohy, 1)
+TEST(TestyPrvejUlohy, Jedna)
 {
-    ASSERT_EQ(foo(1,0), std::make_tuple(1,0,0,0));
+    ASSERT_EQ(startsWith("a", 'b'), false);
 }
-TEST(TestyPrvejUlohy, 2)
+TEST(TestyPrvejUlohy, Dva)
 {
-    ASSERT_EQ(foo(0,1), std::make_tuple(0,1,0,0));
+    ASSERT_EQ(startsWith("a",'a'), true);
 }
-TEST(TestyPrvejUlohy, 3)
+TEST(TestyPrvejUlohy, Dlhy)
 {
-    ASSERT_EQ(foo(0,0), std::make_tuple(0,0,1,0));
+    ASSERT_EQ(startsWith("abbbbb",'a'), true);
 }
-TEST(TestyPrvejUlohy, 4)
+TEST(TestyPrvejUlohy, Prazdny)
 {
-    ASSERT_EQ(foo(sqrt(-1), 1), std::make_tuple(0,0,0,1));
+    ASSERT_EQ(startsWith("",'a'), false);
 }
-TEST(TestyPrvejUlohy, 5)
+TEST(TestyPrvejUlohy, JednaNekonci)
 {
-    ASSERT_EQ(foo(1, sqrt(-1)), std::make_tuple(0,0,0,1));
+    ASSERT_EQ(endsWith("a", 'b'), false);
 }
-TEST(TestyPrvejUlohy, 6)
+TEST(TestyPrvejUlohy, DvaKonci)
 {
-    ASSERT_EQ(foo(sqrt(-1), sqrt(-1)), std::make_tuple(0,0,0,1));
+    ASSERT_EQ(endsWith("a",'a'), true);
+}
+TEST(TestyPrvejUlohy, DlhyKonci)
+{
+    ASSERT_EQ(endsWith("bbbbbbba",'a'), true);
+}
+TEST(TestyPrvejUlohy, PrazdnyNekonci)
+{
+    ASSERT_EQ(endsWith("",'a'), false);
 }

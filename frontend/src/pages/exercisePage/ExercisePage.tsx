@@ -170,25 +170,25 @@ export const ExercisePage = () => {
           {isAdmin && id === -1 && (
             <Button onClick={handleSubmit}>Add exercise</Button>
           )}
-          {id === -1 || <Button onClick={handleSave}>Save</Button>}
           {id === -1 || (
-            <Button
-              disabled={isLoadingLeft || isLoadingRight}
-              onClick={() => {
-                onTestLeft(true)
-                onTestRight(true)
-              }}
-            >
-              Test
-            </Button>
-          )}
-          {id === -1 || (
-            <Button
-              disabled={isLoadingLeft || isLoadingRight}
-              onClick={() => setIsResultModalOpen(true)}
-            >
-              Show results
-            </Button>
+            <>
+              <Button onClick={handleSave}>Save</Button>
+              <Button
+                disabled={isLoadingLeft || isLoadingRight}
+                onClick={() => {
+                  onTestLeft(true)
+                  onTestRight(true)
+                }}
+              >
+                Submit solution
+              </Button>
+              <Button
+                disabled={isLoadingLeft || isLoadingRight}
+                onClick={() => setIsResultModalOpen(true)}
+              >
+                Show results
+              </Button>
+            </>
           )}
           {isAdmin && id !== -1 && (
             <>

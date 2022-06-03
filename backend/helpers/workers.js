@@ -20,7 +20,6 @@ const makeWorkers = (numberOfWorkers) => {
     const workerDir = path.join(workersDirPath, worker)
     if (!fs.existsSync(workerDir)) {
       fs.mkdirSync(workerDir)
-      //   fs.mkdirSync(path.join(workerDir, 'build'))
     }
 
     const cmd = `(docker stop ${worker} || true && docker rm ${worker} || true ) && docker run --name ${worker} -d -v ${workerDir}:/test worker`
