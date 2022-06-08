@@ -49,5 +49,5 @@ CREATE TABLE saved_exercises (
 CREATE TABLE CMakeFiles (
     id serial,
     version int,
-    text text,
+    text text
 );

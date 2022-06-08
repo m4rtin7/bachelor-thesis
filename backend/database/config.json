@@ -1,8 +1,8 @@
 {
   "DATABASE": {
-    "USER": "udjyfnpz",
-    "HOST": "abul.db.elephantsql.com",
-    "DATABASE": "udjyfnpz",
+    "USER": "postgres",
+    "HOST": "localhost",
+    "DATABASE": "dbbp",
     "DIALECT": "postgres",
     "PORT": 5432
   }

@@ -50,7 +50,7 @@ const passTaskToWorker = async (req, res) => {
 }
 
 const runTests = async (worker, taskData, res) => {
-  const r = await executeTests(worker, taskData)
+  const testsResult = await executeTests(worker, taskData)
   fs.readFile(
     path.join(__dirname, `../docker/workers/${worker}/result.txt`),
     'utf8',
@@ -59,7 +59,7 @@ const runTests = async (worker, taskData, res) => {
         result ===
           `Command failed: docker exec ${worker} bash -c "cd test && cmake -S . -B build && cmake --build build && ./build/solution> result.txt"\n"` ||
         result === undefined
-          ? r
+          ? testsResult
           : validOutputFile(result)
 
       if (taskData.save) saveResult({ ...taskData, result })
